@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del jugador</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        .detalle {
+            border: 1px solid black;
+            padding: 20px;
+            width: 400px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Detalle del jugador</h1>
+
+    <div class="detalle">
+        <p>
+            <strong>Nombre:</strong>
+            <span th:text="${jugador.nombre}">Nombre</span>
+        </p>
+
+        <p>
+            <strong>Edad:</strong>
+            <span th:text="${jugador.edad}">0</span>
+        </p>
+
+        <p>
+            <strong>Posición:</strong>
+            <span th:text="${jugador.posicion}">Posición</span>
+        </p>
+    </div>
+
+    <a href="/jugadores">Volver a la lista</a>
+
+</body>
+</html>

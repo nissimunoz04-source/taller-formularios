@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso denegado</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .contenedor {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 420px;
+        }
+
+        h1 {
+            color: #c0392b;
+        }
+
+        p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #17613e;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Acceso denegado</h1>
+
+        <h2>No tienes permiso para esta acción.</h2>
+
+        <p>
+            Esta función está disponible únicamente
+            para el administrador de la
+            Escuela de Fútbol Los Cerritos.
+        </p>
+
+        <a href="/jugadores">Volver a la lista de jugadores</a>
+    </div>
+</body>
+</html>

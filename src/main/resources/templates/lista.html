@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de jugadores</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 600px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .sesion {
+            color: #17613e;
+            font-weight: bold;
+        }
+
+        .cerrar-sesion {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #17613e;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lista de jugadores</h1>
+
+    <p class="sesion">
+        Sesión de:
+        <span sec:authentication="name">Usuario</span>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Posición</th>
+
+                <th sec:authorize="hasRole('ADMIN')">
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="jugador, estado : ${jugadores}">
+                <td th:text="${estado.count}">1</td>
+                <td th:text="${jugador.nombre}">Nombre</td>
+                <td th:text="${jugador.edad}">0</td>
+                <td th:text="${jugador.posicion}">Posición</td>
+
+                <td sec:authorize="hasRole('ADMIN')">
+                    <a th:href="@{/jugadores/{id}/editar(id=${jugador.id})}">
+                        Editar
+                    </a>
+
+                    <form th:action="@{/jugadores/{id}/eliminar(id=${jugador.id})}"
+                          method="post">
+
+                        <button type="submit">
+                            Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/jugadores/nuevo}"
+       sec:authorize="hasRole('ADMIN')">
+        Inscribir jugador
+    </a>
+
+    <div class="cerrar-sesion">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">
+                Cerrar sesión
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Jugador</title>
+
+    <style>
+        .campo-error {
+            border: 2px solid red;
+        }
+
+        .resumen-errores {
+            border: 1px solid red;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mensaje-error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 th:text="${jugador.id == null} ? 'Registro de jugador' : 'Editar jugador'">
+        Registro de jugador
+    </h1>
+
+    <form th:action="@{/jugadores}"
+          th:object="${jugador}"
+          method="post"
+          novalidate>
+
+        <!-- Conserva el ID cuando estamos editando -->
+        <input type="hidden" th:field="*{id}">
+
+        <div class="resumen-errores"
+             role="alert"
+             th:if="${#fields.hasAnyErrors()}">
+
+            <p>Revisa estos datos antes de continuar:</p>
+
+            <ul>
+                <li th:each="error : ${#fields.allErrors()}"
+                    th:text="${error}">
+                    Error
+                </li>
+            </ul>
+        </div>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text"
+               id="nombre"
+               th:field="*{nombre}"
+               th:errorclass="campo-error"
+               aria-describedby="nombre-error">
+
+        <p id="nombre-error"
+           class="mensaje-error"
+           th:if="${#fields.hasErrors('nombre')}"
+           th:errors="*{nombre}">
+            Error
+        </p>
+
+        <br>
+
+        <label for="edad">Edad:</label>
+        <input type="number"
+               id="edad"
+               th:field="*{edad}"
+               th:errorclass="campo-error"
+               aria-describedby="edad-error">
+
+        <p id="edad-error"
+           class="mensaje-error"
+           th:if="${#fields.hasErrors('edad')}"
+           th:errors="*{edad}">
+            Error
+        </p>
+
+        <br>
+
+        <label for="posicion">Posición:</label>
+        <input type="text"
+               id="posicion"
+               th:field="*{posicion}"
+               th:errorclass="campo-error"
+               aria-describedby="posicion-error">
+
+        <p id="posicion-error"
+           class="mensaje-error"
+           th:if="${#fields.hasErrors('posicion')}"
+           th:errors="*{posicion}">
+            Error
+        </p>
+
+        <br>
+
+        <label for="correoEncargado">Correo del encargado:</label>
+        <input type="email"
+               id="correoEncargado"
+               th:field="*{correoEncargado}"
+               th:errorclass="campo-error"
+               aria-describedby="correoEncargado-error">
+
+        <p id="correoEncargado-error"
+           class="mensaje-error"
+           th:if="${#fields.hasErrors('correoEncargado')}"
+           th:errors="*{correoEncargado}">
+            Error
+        </p>
+
+        <br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text"
+               id="telefono"
+               th:field="*{telefono}"
+               th:errorclass="campo-error"
+               aria-describedby="telefono-error">
+
+        <p id="telefono-error"
+           class="mensaje-error"
+           th:if="${#fields.hasErrors('telefono')}"
+           th:errors="*{telefono}">
+            Error
+        </p>
+
+        <br>
+
+        <button type="submit"
+                th:text="${jugador.id == null} ? 'Registrar jugador' : 'Guardar cambios'">
+            Registrar jugador
+        </button>
+
+    </form>
+
+</body>
+</html>
